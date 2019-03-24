@@ -10,41 +10,40 @@
 <body ng-app="myApp">
 <div ng-controller="Aaa">
 
-    <input type="checkbox" ng-model="aaa">
+    <input type="button" value="{{text}}" ng-disabled="isDisabled" ng-click="btClick()">
+    <input type="button" ng-value="text" ng-disabled="isDisabled" ng-click="btClick()">
 
-    <select>
-        <option>111</option>
-        <option ng-selected="aaa">222</option>
-    </select>
-    <br>
-
-    <input type="text" ng-change="bbb='hxy'" ng-model="bbb">{{bbb}}<br>
-
-    <input type="text" value="复制" ng-copy="copy=true">{{copy}}<br>
-    <input type="text" value="剪切" ng-cut="cut=true">{{cut}}<br>
-    <input type="text" value="粘贴" ng-paste="paste=true">{{paste}}<br>
 </div>
-
 </body>
 <script type="text/javascript">
-
     /*
-    事件指令：
-    ng-selected : 下拉框
-    ng-change ：内容改变就调用
-    ng-copy ：复制
-    ng-cut ： 剪切
-    ng-paste ： 粘贴
-    */
-
+    * ng-disabled 按钮禁用
+    * ng-readonly 输入框
+    * ng-checked 是否可选择
+    * ng-value 值
+    * */
     var m1 = angular.module('myApp',[]);
-    m1.controller('Aaa',['$scope',function ($scope) {
-        $scope.dataList = [
-            'aaaa',
-            'bbbb',
-            'cccc',
-            'dddd'
-        ];
+    m1.controller('Aaa',['$scope','$interval',function ($scope,$interval) {
+
+        var iNow = 5;
+        $scope.text = iNow+'秒';
+        $scope.isDisabled = true;
+        $scope.btClick = function () {
+            alert("我喜欢你！！！")
+        };
+
+        var timer = $interval(function () {
+            iNow --;
+            $scope.text = iNow+'秒';
+            if(iNow == 0){
+                $scope.isDisabled = false;
+                $scope.text = '可以点击了';
+                //clearInterval(timer) //原生清除定时器，不管用
+                $interval.cancel(timer);
+            }
+        },1000);
+
+
     }]);
 
 </script>

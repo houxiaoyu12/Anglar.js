@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/angular-1.5.5/angular.js"></script>
+    <script src="https://cdn.bootcss.com/angular-sanitize/1.5.5/angular-sanitize.min.js"></script>
+    <style type="text/css">
+    </style>
+</head>
+<body ng-app="myApp">
+<div ng-controller="Aaa">
+
+    <p ng-bind="text"></p>
+    <p ng-bind-template="{{text}},{{text}}"></p>
+    <p ng-bind-html="text"></p>
+    <p ng-cloak>{{text}}</p>
+    <p ng-non-bindable>{{text}}</p>
+</div>
+</body>
+<script type="text/javascript">
+
+    /*
+    * ng-bind
+    * ng-cloak : 让display： none当表达式解析完事后让其显示，提高用户体验
+    * ng-bind-templete
+    * ng-bind-html
+    * ng-non-bindable ：不去让{{}}表达式进行解析
+    * */
+    var m1 = angular.module('myApp',['ngSanitize']);//插件引入方式
+    m1.controller('Aaa',['$scope','$interval',function ($scope,$interval) {
+
+        $scope.text = '<h1>hello</h1>';
+
+
+
+    }]);
+
+</script>
+</html>
