@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/angular-1.2.29/angular.js"></script>
+    <style type="text/css">
+        p{
+            color: red;
+        }
+    </style>
+</head>
+<body ng-app>
+    <!--<div ng-controller="Aaa">
+        <p>{{name}}</p>
+    </div>
+
+    <div ng-controller="Bbb">
+        <p>{{name}}</p>
+    </div>-->
+</body>
+<script type="text/javascript">
+
+    //angular.bind()-> $.proxy() : 改变this指向
+
+   /* function show(n1,n2) {
+        console.log(n1);
+        console.log(n2);
+        alert(this);
+    }
+    //show();//this指向window
+
+    //第一个参数：为this的指向，第二个参数：对应的函数；
+    angular.bind(document,show)(1,2);//this指向document;()中可以传参数
+*/
+
+
+    //angular.copy();  拷贝对象
+
+   /* var a = {
+        name: 'hello'
+    };
+    var b = {
+        age : '20'
+    };
+    //var c = angular.copy(a);
+    var c = angular.copy(a,b);//a把所有值覆盖给了b，b和a一样
+
+   console.log(c);*/
+
+
+
+   //angular.extend() 对象的继承
+
+    var a = {
+        name: 'hello'
+    };
+    var b = {
+        age : '20'
+    };
+
+    var c = angular.extend(b,a);//将a的值赋值给了b，b拥有name、age属性
+    console.log('a的值：',a);
+    console.log('b的值：',b);
+    console.log('c的值：',c);
+</script>
+</html>

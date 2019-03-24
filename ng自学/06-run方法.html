@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/angular-1.5.5/angular.js"></script>
+
+</head>
+<body ng-app="myApp">
+<div>
+    <p>{{name}}</p>
+</div>
+
+
+</body>
+<script type="text/javascript">
+    var m1 = angular.module('myApp',[]);
+    //说明$run只有全局作用域，没有局部作用域
+    m1.run(['$rootScope',function ($rootScope) {//跳过controler（控制器）,但是注入的必须是$rootscope
+        $rootScope.name = 'hello'
+    }])
+</script>
+</html>

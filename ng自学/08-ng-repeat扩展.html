@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/angular-1.5.5/angular.js"></script>
+    <style type="text/css">
+        .active{
+            background: yellow;
+        }
+        .unactive{
+            background: pink;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+<div ng-controller="Aaa">
+    <ul>
+        <li class="{{$even ? 'active' : 'unactive'}}" ng-repeat="data in dataList">{{data}}</li>
+    </ul>
+
+    <div ng-repeat-start="data in dataList">{{data}}</div>
+    <p>{{data}}</p>
+    <div ng-repeat-end="data in dataList">{{data}}</div>
+</div>
+
+</body>
+<script type="text/javascript">
+    //将下面注释的全局函数变成模块化的写法
+    /*
+    ng-repeat指令：
+    ng-$inidex
+    ng-$first
+    ng-$middle
+    ng-$last
+    ng-$even //基数行 返回true
+    ng-$odd  //偶数行 返回true
+    ng-repeat-start
+    ng-repeat-end
+     */
+
+    var m1 = angular.module('myApp',[]);
+    m1.controller('Aaa',['$scope',function ($scope) {
+        $scope.dataList = [
+            'aaaa',
+            'bbbb',
+            'cccc',
+            'dddd'
+        ];
+    }]);
+
+</script>
+</html>

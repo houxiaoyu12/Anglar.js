@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/angular-1.2.29/angular.js"></script>
+</head>
+<body ng-app>
+    <!--ng-app:相当于初始化，写完ng才起作用，ng-app是局部的，写在标签中，指定一个局部范围，写在html标签上对整个页面都起作用-->
+    <div ng-controller="Aaa" ng-click="show()">
+        {{name}}
+    </div>
+
+</body>
+<script type="text/javascript">
+    //ng中提供的延时定时器：$timeout
+    function Aaa($scope,$timeout) {
+        $scope.name = 'hello';
+        /*setTimeout(function () {//原生的延时定时器，ng不支持
+            $scope.name = 'hxy';
+        },2000)*/
+
+        /*$timeout(function () {//数据改变，自动改变视图的数据
+            $scope.name = 'hxy';
+        },3000)*/
+
+        setTimeout(function () {
+            $scope.$apply(function () {//监听apply内部的数据是否有变化
+                $scope.name = 'hxy';
+            })
+        },2000);
+
+        $scope.show = function () {
+            $scope.name = 'hxy';
+        }
+    }
+</script>
+</html>

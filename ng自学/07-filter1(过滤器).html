@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/angular-1.5.5/angular.js"></script>
+</head>
+<body ng-app="myApp">
+    <div ng-controller="Aaa">
+        <!--<p>{{name}}</p>-->
+        <!--<p>{{name | limitTo : 2}}</p>-->
+        <!--<p>{{name | date : 'yyyy-MM-dd HH:mm:ss'}}</p>-->
+        <!--orderBy:第二个参数是你排序-->
+        <!--<p>{{name | orderBy : 'color' : true}}</p>-->
+        <!--第二参数是匹配整体-->
+        <!--<p>{{name | filter : 'red' : true}}</p>-->
+        <p>{{name | limitTo : 2 | uppercase}}</p>
+    </div>
+
+</body>
+<script type="text/javascript">
+    //将下面注释的全局函数变成模块化的写法
+
+    var m1 = angular.module('myApp',[]);
+    m1.controller('Aaa',['$scope',function ($scope) {
+        //$scope.name = 'hello world';
+        //$scope.name = ['a','b','c']
+        //$scope.name = '156156156456';
+
+        /*$scope.name  = [
+            {color : 'red',age : '20'},
+            {color : 'green',age : '21'},
+            {color : 'yellow',age : '22'},
+            {color : 'blue',age : '23'}
+        ]*/
+        $scope.name = 'hello'
+
+    }]);
+
+
+</script>
+</html>

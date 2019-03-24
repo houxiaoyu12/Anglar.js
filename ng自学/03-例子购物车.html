@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/angular-1.2.29/angular.js"></script>
+</head>
+<body ng-app>
+    <!--ng-app:相当于初始化，写完ng才起作用，ng-app是局部的，写在标签中，指定一个局部范围，写在html标签上对整个页面都起作用-->
+    <div ng-controller="Aaa">
+        <p>价格：<input type="text" ng-model="iphone.price"></p>
+        <p>个数：<input type="text" ng-model="iphone.num"></p>
+        <p>费用：<span>{{sum() | currency:'￥'}}</span></p>
+        <p>运费： <span>{{iphone.fre | currency:'￥'}}</span></p>
+        <p>总额： <span>{{sum() + iphone.fre | currency:'￥'}}</span></p>
+    </div>
+
+</body>
+<script type="text/javascript">
+    function Aaa($scope) {
+        $scope.iphone = {
+            price : 50,
+            num : 1,
+            fre : 10,
+        };
+        $scope.sum = function () {
+            return $scope.iphone.price * $scope.iphone.num;
+        };
+        $scope.$watch($scope.sum,function (newVal,oldVal) {
+           // console.log(newVal);
+           // console.log(oldVal);
+            $scope.iphone.fre = newVal >= 500 ? 0 : 10;
+        })
+
+    }
+</script>
+</html>
+<!--
+过滤器：currency 可以传参 currency：￥;
+        number:2 参数为保留小数点后面的位数
+$watch（监听）:监听数据变化挂载到￥scope下面的，三参数true(表示深度监听，可以监听字符串和函数)
+-->

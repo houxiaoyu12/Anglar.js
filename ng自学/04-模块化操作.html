@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/angular-1.5.5/angular.js"></script>
+    <style type="text/css">
+        p{
+            color: red;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+    <div ng-controller="Aaa">
+        <p>{{name}}</p>
+    </div>
+
+    <div ng-controller="Bbb">
+        <p>{{name}}</p>
+    </div>
+</body>
+<script type="text/javascript">
+    //将下面注释的全局函数变成模块化的写法
+
+    var m1 = angular.module('myApp',[]);//[]中写的是当前模块要依赖的其它模块
+    //官方提供的方法如下：线上压缩之后也不会出问题使用数组的方式[]，以后要这样写；
+    m1.controller('Aaa',['$scope',function ($scope) {//Aaa对应的就是函数名，后面跟的是回调函数
+        $scope.name = 'hello world';
+    }]);
+
+    m1.controller('Bbb',['$scope',function ($scope) {
+        $scope.name = 'ni hao ma';
+    }]);
+
+
+    //这样写开发的时候可以但是不能解决线上压缩之后的问题
+    /*m1.controller('Aaa',function ($scope) {//Aaa对应的就是函数名，后面跟的是回调函数
+        $scope.name = 'hello world';
+    });
+
+    m1.controller('Bbb',function ($scope) {
+        $scope.name = 'ni hao ma';
+    });*/
+
+
+    /*function Aaa($scope,$rootScope) {//添加一个$rootScope全局的作用域
+
+    }
+    function Bbb($scope) {
+        $scope.name = 'ni hao';
+    }*/
+</script>
+</html>
+<!--模块化：减少各个变量之间的互相污染，模块之间的互相依赖
+    ng-app指要初始化的模块，以为有很多的模块，需要指定哪个模块要初始化
+-->

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/angular-1.2.29/angular.js"></script>
+    <style type="text/css">
+        p{
+            color: red;
+        }
+    </style>
+</head>
+<body ng-app>
+    <div ng-controller="Aaa">
+        <p>{{name}}</p>
+    </div>
+
+    <div ng-controller="Bbb">
+        <p>{{name}}</p>
+        <p>{{age}}</p>
+    </div>
+</body>
+<script type="text/javascript">
+    /*
+    依赖注入 ng 中的形参 是不能被修改的，每个形参的意义不一样，如果修改了ng不知道你要做什么，
+    所以形参不能任意修改
+    ng中$符号，注入的形参，一般被称为服务，以$加变量名
+    ng-controller是一个控制器（C） 链接数据（M）与视图（V）的桥梁
+     */
+
+    function Aaa($scope,$rootScope) {//添加一个$rootScope全局的作用域
+        $scope.name = 'hello world';
+        $rootScope.age = '20';//全局的作用域，所以在Bbb中的age也能找到，类似js变量作用域，先在本身查找，本身没有向上查找，直至全局
+    }
+    function Bbb($scope) {
+        $scope.name = 'ni hao';
+        $scope.age = '30';//先在本身的作用域中查找，找到返回
+    }
+</script>
+</html>

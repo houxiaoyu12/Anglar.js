@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/angular-1.5.5/angular.js"></script>
+</head>
+<body ng-app="myApp">
+    <div ng-controller="Aaa">
+        <p>{{name | firstUpper : 2}}</p>
+    </div>
+
+</body>
+<script type="text/javascript">
+    //将下面注释的全局函数变成模块化的写法
+
+    var m1 = angular.module('myApp',[]);
+/*----------------------------------------------------*/
+    //自定义过滤器的使用：
+    m1.filter('firstUpper',function () {
+        return function (str,num) {
+            //console.log(str);
+            console.log(num);
+            return str.charAt(0).toUpperCase() + str.substring(1)
+        }
+    });
+/*-----------------------------------------------------------*/
+    m1.controller('Aaa',['$scope','$filter',function ($scope,$filter) {//依赖注入，得到filter这个服务，就可以用了
+        //$scope.name = $filter('uppercase')('hello')
+        //$scope.name = $filter('number')('2323232323.1144',1)
+        $scope.name = 'hello'
+    }]);
+
+
+</script>
+</html>

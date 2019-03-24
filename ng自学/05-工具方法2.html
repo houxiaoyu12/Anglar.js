@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/angular-1.5.5/angular.js"></script>
+    <style type="text/css">
+        p{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div ng-controller="Aaa">
+    <p>{{name}}</p>
+</div>
+
+<div ng-controller="Bbb">
+    <p>{{name}}</p>
+</div>
+</body>
+<script type="text/javascript">
+    //将下面注释的全局函数变成模块化的写法
+
+    var m1 = angular.module('myApp1',[]);//[]中写的是当前模块要依赖的其它模块
+    //官方提供的方法如下：线上压缩之后也不会出问题使用数组的方式[]，以后要这样写；
+    m1.controller('Aaa',['$scope',function ($scope) {//Aaa对应的就是函数名，后面跟的是回调函数
+        $scope.name = 'hello world';
+    }]);
+
+    var m2 = angular.module('myApp2',[]);
+    m2.controller('Bbb',['$scope',function ($scope) {
+        $scope.name = 'ni hao ma';
+    }]);
+    /*模块初始化*/
+    document.onclick = function () {//可以点击 实现加载两个初始化的app
+
+        var aDiv = document.getElementsByTagName('div');
+        angular.bootstrap(aDiv[0],['myApp1']);
+        angular.bootstrap(aDiv[1],['myApp2']);
+    }
+</script>
+</html>

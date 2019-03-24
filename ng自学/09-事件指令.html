@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/angular-1.5.5/angular.js"></script>
+    <style type="text/css">
+    </style>
+</head>
+<body ng-app="myApp">
+<div ng-controller="Aaa">
+
+    <input type="checkbox" ng-model="aaa">
+
+    <select>
+        <option>111</option>
+        <option ng-selected="aaa">222</option>
+    </select>
+    <br>
+
+    <input type="text" ng-change="bbb='hxy'" ng-model="bbb">{{bbb}}<br>
+
+    <input type="text" value="复制" ng-copy="copy=true">{{copy}}<br>
+    <input type="text" value="剪切" ng-cut="cut=true">{{cut}}<br>
+    <input type="text" value="粘贴" ng-paste="paste=true">{{paste}}<br>
+</div>
+
+</body>
+<script type="text/javascript">
+
+    /*
+    事件指令：
+    ng-selected : 下拉框
+    ng-change ：内容改变就调用
+    ng-copy ：复制
+    ng-cut ： 剪切
+    ng-paste ： 粘贴
+    */
+
+    var m1 = angular.module('myApp',[]);
+    m1.controller('Aaa',['$scope',function ($scope) {
+        $scope.dataList = [
+            'aaaa',
+            'bbbb',
+            'cccc',
+            'dddd'
+        ];
+    }]);
+
+</script>
+</html>
