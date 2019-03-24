@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/angular-1.5.5/angular.js"></script>
+</head>
+<body ng-app="myApp">
+<div ng-controller="Aaa" ng-include="'14.html'">
+
+</div>
+</body>
+<script type="text/javascript">
+
+    /*
+    * ng-init: 初始化一些变量数据
+    * ng-include：
+    * ng-model:
+    *   -ng-model-options
+    *   -updateOn
+    * ng-controller
+    *    -as
+    * */
+    var m1 = angular.module('myApp',[]);//插件引入方式
+    m1.controller('Aaa',['$scope',function ($scope) {
+
+        $scope.dataList = [
+            ['a','b'],['c','d']
+        ]
+
+    }]);
+
+</script>
+</html>

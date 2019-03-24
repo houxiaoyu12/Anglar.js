@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/angular-1.5.5/angular.js"></script>
+    <style type="text/css">
+        .red{
+            background: red;
+        }
+        .yellow{
+            color: yellow;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+<div ng-controller="Aaa">
+    <input type="checkbox" ng-model="bBtn">
+    <!--<div ng-show="bBtn">{{text}}</div>-->
+    <!--<div ng-if="bBtn">{{text}}</div>-->
+    <div ng-switch on="bBtn">
+        <p ng-switch-default="">默认的效果</p>
+        <p ng-switch-when="fasle">切换的效果</p>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+
+    /*
+    * ng-show: true显示/false隐藏 通过display的形式控制显示隐藏的
+    * ng-hide：true隐藏/false显示  与 ng-show相反
+    * ng-if: 是Dom的添加操作
+    * ng-swtich
+    *   -on
+    *   -default
+    *   -when
+    * ng-open:h5 detail 中的显示隐藏的一种写法，不常用
+    * */
+    var m1 = angular.module('myApp',[]);//插件引入方式
+    m1.controller('Aaa',['$scope',function ($scope) {
+
+        $scope.text = 'hello';
+        $scope.bBtn = true
+
+    }]);
+
+</script>
+</html>

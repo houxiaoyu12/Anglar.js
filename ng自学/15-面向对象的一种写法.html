@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/angular-1.5.5/angular.js"></script>
+</head>
+<body ng-app="myApp">
+<div ng-controller="FnAaa as a1">
+    <div>{{a1.num}}</div>
+</div>
+</body>
+<script type="text/javascript">
+
+    /*todo   这个方法 可能被摒弃了*/
+    /*
+    * ng-init: 初始化一些变量数据
+    * ng-include：
+    * ng-model:
+    *   -ng-model-options : 控制双向数据绑定时候，数据执行的一个过程
+    *   -updateOn
+    * ng-controller
+    *    -as
+    * */
+    var m1 = angular.module('myApp',[]);//插件引入方式
+    m1.controller('Aaa',['$scope',FnAaa]);
+    function FnAaa($scope) {
+
+    }
+    FnAaa.prototype.num = '123';
+    FnAaa.prototype.text = 'hello';
+    FnAaa.prototype.show = function () {
+        return 'angular.js'
+    }
+</script>
+</html>

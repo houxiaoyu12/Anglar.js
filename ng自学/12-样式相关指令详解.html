@@ -4,41 +4,53 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="./js/angular-1.5.5/angular.js"></script>
-    <style type="text/css">
-        .red{
-            background: red;
+    <style>
+        input.ng-valid{
+            border: 1px green solid;
         }
-        .yellow{
-            color: yellow;
+        input.ng-invalid{
+            border: 1px red solid;
         }
     </style>
 </head>
 <body ng-app="myApp">
 <div ng-controller="Aaa">
+    <select ng-options="color.name for color in colors" ng-model="Mycolor"></select><br>
+    <p>{{Mycolor}}</p>
 
-    <!--<div ng-class="{red:true}">{{text}}</div>-->
-    <div ng-style="style">{{text}}</div>
-    <div ng-class="class">{{text}}</div>
-    <!--<a ng-href="{{url}}">baidu</a>-->
-    <a ng-attr-href="{{url}}" ng-attr-title="{{text}}">baidu</a>
+    <form novalidate name="myForm">
+        <input type="email" name="mgText" ng-model="text" required ng-pattern="/^[a-zA-Z]$/">
+        <div>{{myForm.mgText.$valid}}</div>
+        <div>{{myForm.mgText.$invalid}}</div>
+        <div>{{myForm.mgText.$pristine}}</div>
+        <div>{{myForm.mgText.$dirty}}</div>
+        <div>{{myForm.mgText.$error}}</div>
+    </form>
 </div>
 </body>
 <script type="text/javascript">
-
     /*
-    * ng-class
-    * ng-style
-    * ng-href
-    * ng-src
-    * ng-attr-(suffix)
+    * 表单验证：
+    * $vallid：表单验证成功 返回true
+    * $invalid：与上相反
+    * $pristine：修改验证后为true
+    * $dirty
+    * $error：验证信息
+    * required:是否为空
+    * ng-minlength: 最小长度.
+    * ng-maxlength: 最大长度.
+    * ng-pattern:正则
     * */
+
     var m1 = angular.module('myApp',[]);//插件引入方式
     m1.controller('Aaa',['$scope',function ($scope) {
 
-        $scope.text = 'hello';
-        $scope.style = {color:'yellow',background:'red'}
-        $scope.class = {red:true,yellow:true}
-        $scope.url = 'http://www.baidu.com'
+        $scope.colors = [
+            {name : 'red' },
+            {name : 'yellow' },
+            {name : 'blue' }
+        ];
+        $scope.text = 'hello'
 
     }]);
 

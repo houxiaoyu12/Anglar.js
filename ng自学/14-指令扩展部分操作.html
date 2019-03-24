@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/angular-1.5.5/angular.js"></script>
+    <style type="text/css">
+        .red{
+            background: red;
+        }
+        .yellow{
+            color: yellow;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+<div ng-controller="Aaa">
+    <div ng-repeat="dataOut in dataList" ng-init="outerIndex = $index">
+        <p ng-repeat="dataInner in dataOut" ng-init="innerIndex = $index">
+            {{dataInner}}:{{outerIndex}}:{{innerIndex}}
+        </p>
+    </div>
+    <input type="text" ng-model="text" ng-model-options="{updateOn : 'blur'}">
+    <div>{{text}}</div>
+</div>
+</body>
+<script type="text/javascript">
+
+    /*
+    * ng-init: 初始化一些变量数据
+    * ng-include：
+    * ng-model:
+    *   -ng-model-options : 控制双向数据绑定时候，数据执行的一个过程
+    *   -updateOn
+    * ng-controller
+    *    -as
+    * */
+    var m1 = angular.module('myApp',[]);//插件引入方式
+    m1.controller('Aaa',['$scope',function ($scope) {
+
+        $scope.dataList = [
+            ['a','b'],['c','d']
+        ];
+        $scope.text = 'hello'
+
+    }]);
+
+</script>
+</html>
