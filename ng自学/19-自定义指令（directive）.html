@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en"  ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/angular-1.5.5/angular.js"></script>
+    <script src="./js/jquery/jquery-1.11.1.js"></script>
+    <style type="text/css">
+        #div1 div{
+            width: 200px;
+            height: 200px;
+            border: 1px red solid;
+            display: none;
+        }
+        #div1 input.active{
+            background: pink;
+        }
+
+    </style>
+</head>
+<body ng-controller="Aaa">
+<my-tab my-id="div1"></my-tab>
+
+</body>
+<script type="text/javascript">
+    /*
+    * scope:{
+    * @:解析的是本身
+    * =：解析 数据，变量名去找
+    * $:函数的传递
+    * }
+    * */
+
+    var m1 = angular.module('myApp',[]);//插件引入方式
+
+    m1.directive('myTab',function () {
+        return {
+            restrict : 'E',
+            //scope : true,//独立作用域
+            scope : {
+                //myId : '@'
+                //myData : '='
+
+            },//隔离作用域
+            controller : ['$scope',function ($scope) {
+                $scope.data1 = [
+                    {title : '数学',content : '111111'},
+                    {title : '语文',content : '222222'},
+                    {title : '英语',content : '333333'}
+                ];
+            }],
+            replace : true, //替换成所写的标签，外部没有p标签包着
+            templateUrl : '19.html',
+            link : function (scope,element,attr) {
+                /*console.log(scope);
+                console.log(element);
+                console.log(attr);*/
+                console.log(element[0]);
+
+                $(element[0]).delegate('input','click',function () {//jQ的委托，委托给input标签
+                    $(this).attr('class','active').siblings('input').attr('class','');
+
+                    $(this).siblings('div').eq($(this).index()).css('display','block').siblings('div').css('display','none')
+                })
+            }
+
+        }
+    });
+    m1.controller('Aaa',['$scope',function ($scope) {
+       /* $scope.data1 = [
+            {title : '数学',content : '111111'},
+            {title : '语文',content : '222222'},
+            {title : '英语',content : '333333'}
+        ];*/
+    }])
+
+</script>
+</html>

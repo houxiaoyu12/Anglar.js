@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en"  ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/angular-1.5.5/angular.js"></script>
+    <script src="./js/jquery/jquery-1.11.1.js"></script>
+    <style>
+        #div1{
+            height: 100px;
+            width: 100px;
+            background: red;
+            position: absolute;
+        }
+    </style>
+</head>
+<body ng-controller="Aaa">
+<div id="div1" my-drag="true"></div>
+</body>
+<script type="text/javascript">
+
+    var m1 = angular.module('myApp',[]);//插件引入方式
+
+    m1.directive('myDrag',function () {
+        return {
+            restrict : 'A',
+            link : function (scope,element,attr) {
+                //console.log(typeof attr.myDrag);//返回的是字符串
+                attr.myDrag = angular.equals(attr.myDrag,'true');
+                //console.log(typeof attr.myDrag);
+                var disX = 0;
+                var disY = 0;
+                element.on('mousedown',function (ev) {
+                    var _this = this;
+                    disX = ev.pageX - $(this).offset().left;
+                    disY = ev.pageY - $(this).offset().top;
+
+                    if(attr.myDrag){
+                        var $line = $('<div>');
+                        $line.css({
+                            width : $(this).outerWidth(),
+                            height : $(this).outerHeight(),
+                            position : 'absolute',
+                            left : $(this).offset().left,
+                            top : $(this).offset().top,
+                            border : '1px gray dotted'
+                        });
+                        $('body').append($line);
+
+                    }
+
+                    $(document).on('mousemove',function (ev) {
+
+                        if(attr.myDrag){
+                            $line.css('left',ev.pageX - disX);
+                            $line.css('top',ev.pageY - disY);
+
+                        } else {
+                            $(_this).css('left',ev.pageX - disX);
+                            $(_this).css('top',ev.pageY - disY);
+                          
+                        }
+                    });
+                    $(document).on('mouseup',function () {
+                        $(document).off();
+                        if(attr.myDrag){
+                            $(_this).css('left',$line.offset().left);
+                            $(_this).css('top',$line.offset().top);
+                            $line.remove();
+                        }
+                    });
+                    return false;
+                })
+            }
+
+        }
+    });
+    m1.controller('Aaa',['$scope',function ($scope) {
+
+    }])
+
+</script>
+</html>

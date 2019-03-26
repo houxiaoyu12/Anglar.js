@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/angular-1.5.5/angular.js"></script>
+    <style type="text/css">
+
+
+    </style>
+</head>
+<body ng-app="myApp">
+<div ng-controller="Aaa">
+    <my-hello></my-hello>
+    <p my-hello></p>
+    <!--<p class="hello"></p>
+    &lt;!&ndash; directive:hello &ndash;&gt;-->
+</div>
+</body>
+<script type="text/javascript">
+    /*
+    * directive
+    * -restrict : 四种方式：常用的是AE E（标签），A （属性），AE (即是标签，属性)，C （变成calss指令），M（注释）
+    * -replace
+    * -template
+    * -templateUrl
+    * */
+
+    var m1 = angular.module('myApp',[]);//插件引入方式
+
+    m1.directive('myHello',function () {
+        return {
+            //restrict : 'E', //标签指令
+            //restrict : 'A', //属性指令
+            //restrict : 'AE', //即是 标签 属性
+            restrict : 'AECM', //即是 标签 属性 class
+            replace : true, //替换成所写的标签，外部没有p标签包着
+            template : '<div>hello Angular.js！</div>\
+            <div>hello Angular.js！</div>'
+
+        }
+    });
+
+    m1.controller('Aaa',['$scope',function ($scope) {
+
+    }]);
+
+</script>
+</html>

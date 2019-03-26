@@ -1,0 +1,16 @@
+<div id="div1">
+    <!--<input class="active" type="button" value="1">
+    <input type="button" value="2">
+    <input type="button" value="3">
+    <div style="display: block">1111</div>
+    <div>2222</div>
+    <div>3333</div>-->
+    <input ng-repeat="data in data1"
+           type="button"
+           ng-value="data.title"
+           ng-class="{active:$first}"
+    >
+    <div ng-repeat="data in data1"
+         ng-style="{display : $first ? 'block' : 'none'}"
+    >{{data.content}}</div>
+</div>
