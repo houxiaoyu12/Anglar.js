@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/angular-1.5.5/angular.js"></script>
+    <style type="text/css">
+    </style>
+</head>
+<body ng-app="myApp">
+<div ng-controller="Aaa">
+    <input type="text" ng-model="name" ng-keyup="change(name)">
+    <input type="button" ng-click="change(name)" value="搜索">
+    <ul>
+        <li ng-repeat="item in data">{{item}}</li>
+    </ul>
+</div>
+
+</body>
+<script type="text/javascript">
+
+
+    var m1 = angular.module('myApp',[]);
+    m1.controller('Aaa',['$scope','$http','$timeout',function ($scope,$http,$timeout) {
+       /* /!*正常书写*!/
+        $http({
+            method : 'GET/JSONP',
+            url : ''
+        }).success(function (data,state,headers,config) {
+            console.log(data);
+        }).error(function (data) {
+            console.log(data)
+        });
+        /!*支持简写*!/
+        $http.get('地址').success(function (data,state,headers,config) {
+            console.log(data);
+        }).error(function (data) {
+            console.log(data)
+        })*/
+       var timer = null;
+
+       $scope.data = [];
+
+       $scope.change = function(name){debugger;
+
+           $timeout.cancel(timer);
+
+           timer = $timeout(function () {
+               $http({
+                   method : 'JSONP',
+                   url : 'http://suggestion.baidu.com/su?p=3&wd='+ name +'&ie=UTF-8&cb=JSON_CALLBACK'
+               }).success(function (data,state,headers,config) {
+                   console.log(data);
+                   $scope.data = data.s;
+               }).error(function (data) {
+                   console.log(data)
+               });
+           },500);
+
+
+       };
+
+
+
+    }]);
+
+</script>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/angular-1.5.5/angular.js"></script>
+    <style type="text/css">
+
+
+    </style>
+</head>
+<body ng-app="myApp">
+<div ng-controller="Aaa">
+    <hello>
+        <hi></hi>
+    </hello>
+</div>
+</body>
+<script type="text/javascript">
+
+    var m1 = angular.module('myApp',[]);//插件引入方式
+
+    m1.directive('hello',function () {
+        return {
+            restrict : 'E',
+            transclude : true,//可以包含标签
+            replace : true, //替换成所写的标签，外部没有p标签包着
+            controller : function () {
+                //$scope.name = 'miaov'; 此时name属性名，只对hello这个hello中找到这个指令
+                this.name = 'miaov'
+            },
+            template : '<div>hello Angular.js！<h1 ng-transclude></h1></div>'
+
+        }
+    });
+    m1.directive('hi',function () {
+        return {
+            restrict : 'E',
+            replace : true, //替换成所写的标签，外部没有p标签包着
+            require : '^hello',//得到自身的hello这个标签，^hello为父级的hello,?hello是容错（即使没有找到也不会报错）
+            template : '<div>hello!</div>',
+            link : function (scope,element,attr,reController) {
+                console.log(reController.name)
+            }
+        }
+    });
+
+    m1.controller('Aaa',['$scope',function ($scope) {
+
+    }]);
+
+</script>
+</html>
