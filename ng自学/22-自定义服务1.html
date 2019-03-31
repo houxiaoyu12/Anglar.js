@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/angular-1.5.5/angular.js"></script>
+    <script src="https://cdn.bootcss.com/angular-sanitize/1.5.5/angular-sanitize.min.js"></script>
+    <style type="text/css">
+    </style>
+</head>
+<body ng-app="myApp">
+<div ng-controller="Aaa">
+
+</div>
+</body>
+<script type="text/javascript">
+
+    var m1 = angular.module('myApp',[]);//插件引入方式
+
+   /* m1.factory('myService',function () {
+        return {
+            name : 'hello',
+            show :function () {
+                return this.name + ':angular';
+
+            }
+        };
+    });
+
+    m1.controller('Aaa',['$scope','myService',function ($scopel,myService) {
+
+            console.log(myService.show());
+
+
+    }]);*/
+
+
+    /*m1.factory('myRandomNum',function () {
+        return function (num1,num2) {
+            return Math.random()*(num1 - num2) + num1;
+        }
+    });
+
+    m1.controller('Aaa',['$scope','myRandomNum',function ($scopel,myRandomNum) {
+
+        console.log(myRandomNum(-3,6))
+
+    }]);*/
+
+    m1.provider('myRandom',function () {
+        return {
+            bolInt : false,
+            ing : function (argBol) {
+                  if(argBol){
+                        this.bolInt = true;
+                  } else {
+                        this.bolInt = false;
+                  }
+            },
+            $get : function () {
+                var _this = this;
+                return function (num1,num2) {
+                    return _this.bolInt ? Math.round(Math.random()*(num2 - num1)) : Math.random()*(num2 - num1) + num1;
+                }
+            }
+        };
+    });
+
+    /*m1.config(['myRandomNumProvider',function (myRandomNumProvider) {
+        myRandomNumProvider.int(true);
+    }]);
+*/
+    m1.controller('Aaa',['$scope','myRandom',function ($scope,myRandom) {
+        ing(true)
+        console.log(myRandom(1,2));
+
+
+    }]);
+
+</script>
+</html>

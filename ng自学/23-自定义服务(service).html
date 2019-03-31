@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/angular-1.5.5/angular.js"></script>
+    <style type="text/css">
+    </style>
+</head>
+<body ng-app="myApp">
+<div ng-controller="Aaa">
+
+</div>
+</body>
+<script type="text/javascript">
+
+
+    /*var m1 = angular.module('myApp',[]);//将自定义的模块‘module1’插入插槽中进行引用
+    //构造函数形式定义服务面向对象的形式
+    m1.service('myService',FnService);
+
+    function FnService () {
+        this.name = 'hello';
+    }
+    FnService.prototype.age = 20;
+
+    m1.controller('Aaa',['$scope','myService',function ($scope,myService) {
+        console.log(myService.name);
+        console.log(myService.age);
+    }])*/
+
+    var m1 = angular.module('myApp',[]);
+    m1.constant('myService','hello angular');//设置常量的方法
+    m1.controller('Aaa',['$scope','myService',function ($scope,myService) {
+        console.log(myService);
+    }])
+</script>
+</html>

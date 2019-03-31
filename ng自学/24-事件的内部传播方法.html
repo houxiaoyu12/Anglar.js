@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/angular-1.5.5/angular.js"></script>
+    <style type="text/css">
+    </style>
+</head>
+<body ng-app="myApp">
+<div ng-controller="Aaa">
+    {{count}}
+    <div ng-controller="Aaa" ng-click="$emit('myEvent')">
+        {{count}}
+        <div ng-controller="Aaa">
+            {{count}}
+        </div>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript">
+
+    /*angularjs的事件
+    *   $emit  向上传播
+    *   $broadcast 向下传播
+    *event 事件的一些属性
+    *   targetScope  目标的作用域
+    *   currentScope  当前的作用域
+    *   name  事件的名字
+    *   stopPropagation()  阻止向上传播
+    *
+    *
+    *
+    * */
+
+    var m1 = angular.module('myApp',[]);
+    m1.controller('Aaa',['$scope',function ($scope) {
+        $scope.count = 0;
+
+        $scope.$on('myEvent',function (event) {
+            $scope.count ++;
+            //console.log(event.targetScope == event.currentScope)
+            //console.log(event.name);
+            event.stopPropagation();//阻止向上传播与$emit一起使用的
+
+        })
+    }]);
+
+</script>
+</html>
